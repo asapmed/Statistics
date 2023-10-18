@@ -1,0 +1,73 @@
+\documentclass[14pt]{extarticle}
+
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{graphicx}
+\usepackage{caption}
+\DeclareCaptionLabelSeparator{dot}{. }
+\captionsetup{justification=centering,labelsep=dot}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\input glyphtounicode.tex
+\input glyphtounicode-cmr.tex
+\pdfgentounicode=1
+\usepackage{bm}
+
+\begin{document}
+
+ФИО: Медяков Даниил Олегович
+
+\vspace{10pt}
+
+Номер задачи: 10
+
+\vspace{10pt}
+
+Решение:
+
+\vspace{10pt}
+
+Для начала проверим, можем ли мы пользоваться критерием согласия $\chi^2$ для сложной гипотезы для этой задачи. Поскольку $n = 200 \geq 50$ и $\nu = \{10, 181, 9\}$, то есть каждая $\nu_j \geq 5$, то мы можем пользоваться критерием согласия $\chi^2$ для сложной гипотезы. Заметим, что по условию нам не задан уровень значимости, а значит возьмем $\alpha = 0,05$. Мы проверяем гипотезу $H_1: Bi(2, \theta)$, а значит, исходя из этой гипотезы и условия, мы имеем следующие параметры:
+
+\begin{eqnarray}
+\notag
+\begin{cases}
+    N = 3\\
+    p_0^0 = C_2^0 \theta^0 (1 - \theta)^2\\
+    p_1^0 = C_2^1 \theta (1 - \theta)\\
+    p_2^0 = C_2^2 \theta^2 (1 - \theta)^0\\
+    n = 200\\
+    \nu = \{10, 181, 9\}
+\end{cases}
+\end{eqnarray}
+
+Далее нам необходимо найти $\hat{\theta}\in \mathbb R^d: \hat{\theta} = \arg\underset{\theta}{\max}\left[\prod\limits_{j = 0}^{N-1} p_j^0 (\theta)^{\nu_j}\right] \Leftrightarrow \sum\limits_{j = 0}^{N-1} \frac{\nu_j}{p_j^0(\theta)}\cdot\frac{\partial p_j^0 (\theta)}{\partial \theta_k}, k = \overline{1, r}$. В нашей задаче $r = 1$. Тогда получаем:
+
+\begin{eqnarray}
+\notag
+    \begin{split}
+        -\frac{\nu_0}{(1-\theta)^2}2(1-\theta) + \frac{\nu_1}{2\theta(1-\theta)}2(1 - 2\theta) + \frac{\nu_2}{\theta^2}2\theta = 0
+        \\
+        -2\nu_0\theta + \nu_1(1 - 2\theta) + 2\nu_2(1-\theta) = 0\Rightarrow \hat{\theta} = \frac{\nu_1 + 2\nu_2}{2n} = 0.4975
+    \end{split}
+\end{eqnarray}
+
+
+Теперь мы готовы вычислить статистику $T_{\chi^2}$:
+
+\begin{equation}
+\notag
+    T_{\chi^2} = \sum\limits_{j=1}^N\frac{\left(\nu_j - np_j^0(\hat{\theta})\right)^2}{np_j^0(\hat{\theta)}} = 32,48 + 65,62 + 33,14 = 131,24
+\end{equation}
+
+
+При том, что наша гипотеза $H_1$ верна, мы получаем сходимость $T_{\chi^2}\overset{H_1, d}{\underset{n\rightarrow\infty}{\longrightarrow}} \chi^2(N-1-r)$. В тоже время $t_{\alpha}$ удовлетворяет условию на уровень значимости, то есть $\mathbb P(T_{\chi^2} \geq t_{\alpha}) = \alpha\Rightarrow \mathbb P(T_{\chi^2} < t_\alpha) = F_{\chi^2} (t_{\alpha}) = 1 - \alpha$. Тогда $t_{\alpha}$ суть $(1-\alpha)$ квантиль распределения $\chi^2(N-1-r)$. В нашем случае:
+
+\begin{equation*}
+    t_{0,05} = \chi^2(1)_{0,95} = 3,84.
+\end{equation*}
+
+Получили $T_{\chi^2} = 131,24 > 3,84 = t_{\alpha}$, то есть мы попадаем в критическую область $\Omega_{\text{кр.}} = \{x\in\Omega ~|~ T_{\chi^2}(x) \geq t_{\alpha}\}$, а значит гипотезу $H_1$ отклоняем.
+
+\end{document}
