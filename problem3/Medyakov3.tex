@@ -1,0 +1,70 @@
+\documentclass[14pt]{extarticle}
+
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{graphicx}
+\usepackage{caption}
+\DeclareCaptionLabelSeparator{dot}{. }
+\captionsetup{justification=centering,labelsep=dot}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\input glyphtounicode.tex
+\input glyphtounicode-cmr.tex
+\pdfgentounicode=1
+\usepackage{bm}
+
+\begin{document}
+
+ФИО: Медяков Даниил Олегович
+
+\vspace{10pt}
+
+Номер задачи: 3
+
+\vspace{10pt}
+
+Решение:
+
+\vspace{10pt}
+
+Для начала найдем совместную плотность распределения $F(x, y) = X_{(1)}, X_{(n)}$. Для этого рассмотрим $\mathbb P(X_{(1)} < x, X_{(n)} < y) = \underbrace{\mathbb P (X_{(n)} < y)}_{P_1} - \\ - \underbrace{\mathbb P (X_{(1)} \geq x, X_{(n)} < y)}_{P_2}$.
+
+Рассмотрим отельно вероятности $P_1, P_2$.
+
+$X_{(i)}\sim \mathcal U[a, b]\Rightarrow P_1 = \left(\frac{y - a}{b - a}\right)^n$
+
+$X_{(i)}\sim \mathcal U[a, b]\Rightarrow P_2 = (F(y) - F(x))^n = \left(\frac{y - x}{b - a}\right)^n$
+
+Теперь рассмотрим 2 случая: $x\geq y, x < y$.
+\begin{itemize}
+    \item [x < y:] $F(x, y) = P_1 - P_2 = \frac{1}{(b-a)^n}\left[(y-a)^n - (y-x)^n\right]
+    \Rightarrow f(x, y) = \frac{\partial^2 F(x, y)}{\partial x\partial y} = \frac{n(n-1)}{(b-a)^n}(y-x)^{n-2}$.
+    \item [x $\geq$ y:] $F(x, y) = P_1 =  \left(\frac{y - a}{b - a}\right)^n \Rightarrow f(x, y) = \frac{\partial^2 F(x, y)}{\partial x\partial y} = 0$
+\end{itemize}
+
+Далее, заметим, что $X_k \sim \mathcal U(0, 1)\Rightarrow X_{(k)}\sim \mathcal{B}(k, n-k+1)$, где $\mathcal{B} - $Beta-распределение. Математическое ожидание и дисперсию Beta-распределения мы считаем известными:
+
+$\xi\sim\mathcal{B}(\alpha, \beta)\Rightarrow\mathbb E[\xi] = \frac{\alpha}{\alpha + \beta}, \mathbb D [\xi] = \frac{\alpha\beta}{(\alpha +\beta)^2(\alpha + \beta + 1)}$.
+
+Далее, пользуясь линейностью и переходя к случайной величине на отрезке $[0, 1]$, получаем: $\frac{X_{(1)} - a}{b-a}\sim \mathcal{B}(1, n), \frac{X_{(n)} - a}{b-a}\sim \mathcal{B}(n, 1)$.
+
+Отсюда сразу находим искомые математические ожидания и дисперсии:
+
+$\mathbb E[X_{(1)}] = a + \frac{b-a}{n+1}$
+
+$\mathbb E[X_{(n)}] = a + \frac{n(b-a)}{n+1}$
+
+$\mathbb D[X_{(1)}] = \frac{n(b-a)^2}{(n+1)^2(n+2)}$
+
+$\mathbb D[X_{(n)}] = \frac{n(b-a)^2}{(n+1)^2(n+2)}$
+
+Перейдем к нахождению коэффициента корреляции.
+
+$\mathbb E[X_{(1)}X_{(n)}] = \int\limits_a^b dx \int\limits_a^b x\cdot y\cdot f(x, y) dy =\\ = \int\limits_a^b dx\int\limits_a^b x\cdot y\cdot (y-x)^{n-2}\cdot\frac{n(n-1)}{(b-a)^n} dy \underset{x<y, \text{по частям}}{=} \int\limits_a^b \left[\frac{n(b-x)^{n-1}xb}{(b-a)^n} - \int\limits_x^b \frac{n(y-x)^{n-1}x}{(b-a)^n}dy\right]dx= \\ = \int\limits_a^b \frac{n(b-x)^{n-1}xb}{(b-a)^n}dx - \int\limits_a^b \frac{(b-x)^{n}x}{(b-a)^n}dx \underset{\text{по частям}}{=} ab + \frac{b(b-a)}{n+1} - \frac{a(b-a)}{n+1} - \frac{(b-a)^2}{(n+2)(n+1)} = \\ = ab + \frac{(b-a)^2}{n+2}$
+
+Тогда $cov(X_{(1)}, X_{(n)}) = ab + \frac{(b-a)^2}{n+2} - (a + \frac{b-a}{n+1})(a + \frac{n(b-a)}{n+1}) = \frac{(b-a)^2}{(n+2)(n+1)^2}$.
+
+Итого: $r = \frac{cov(X_{(1)}, X_{(n)})}{\sqrt{D[X_{(1)}]}\sqrt{D[X_{(n)}]}} = \frac{(b-a)^2}{(n+2)(n+1)^2}\cdot \frac{(n+1)^2(n+2)}{(b-a)^2n} = \frac{1}{n}$.
+
+\end{document}
