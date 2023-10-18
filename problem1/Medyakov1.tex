@@ -1,0 +1,58 @@
+\documentclass[14pt]{extarticle}
+
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{graphicx}
+\usepackage{caption}
+\DeclareCaptionLabelSeparator{dot}{. }
+\captionsetup{justification=centering,labelsep=dot}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\input glyphtounicode.tex
+\input glyphtounicode-cmr.tex
+\pdfgentounicode=1
+\usepackage{bm}
+
+\begin{document}
+
+ФИО: Медяков Даниил Олегович
+
+\vspace{10pt}
+
+Номер задачи: 1
+
+\vspace{10pt}
+
+Решение:
+
+\vspace{10pt}
+
+Для начала покажем, что $\mathbb E [F_n(x)] = F(x)$:
+\begin{equation}
+    \label{eq1}
+    \mathbb E[F_n(x)] \overset{def}{=} \mathbb E\left[\frac{1}{n}\sum\limits_{i=1}^n \mathbb I(X_i < x)\right] = \frac{1}{n}\sum\limits_{i=1}^n \mathbb E[\mathbb I(X_i < x)] = \\  
+    = \mathbb P (X_i < x) = F(x)
+\end{equation}
+
+Теперь получим $\mathbb D[F_n(x)]$:
+\begin{equation}
+\label{eq2}
+    \mathbb D [F_n(x)] = \frac{1}{n^2}\mathbb D \left[\underbrace{\sum\limits_{i=1}^n \mathbb I(X_i < x)}_{\sim Bi(n, F(x)}\right] = \frac{F(x)(1 - F(x))}{n}
+\end{equation}
+
+Тогда, с учетом $\eqref{eq1}, \eqref{eq2}$ и центральной предельной теоремы получаем следующую сходимость:
+\begin{equation}
+\label{eq3}
+    \frac{nF_n(x^*) - nF(x^*)}{\sqrt{nF(x^*)(1 - F(x^*))}}\overset{d}{\underset{n\rightarrow\infty}{\longrightarrow}} \mathcal N(0, 1)
+\end{equation}
+
+Перепишем в удобном нам виде искомую вероятность и найдем ее:
+$
+    \mathbb P[|F_n(x^*) - F(x^*)|\leq \frac{t}{\sqrt{n}}] = \mathbb P \left[\frac{|F_n(x^*) - F(x^*)|}{\sqrt{F(x^*)(1 - F(x^*))}}\leq\frac{t}{\sqrt{nF(x^*)(1 - F(x^*))}}\right] = \\ = \mathbb P \left[\frac{|nF_n(x^*) - nF(x^*)|}{\sqrt{nF(x^*)(1 - F(x^*))}}\leq\frac{t}{\sqrt{F(x^*)(1 - F(x^*))}}\right]\underset{\eqref{eq3}}{=}\\  \underset{\eqref{eq3}}{=}
+    \int\limits_{-t/\sqrt{F(x^*)(1 - F(x^*))}}^{t/\sqrt{F(x^*)(1 - F(x^*))}}\frac{1}{2\pi}\exp^{-\frac{x^2}{2}} dx= \\ = F_{\mathcal N (0, 1)}(\frac{t}{\sqrt{F(x^*)(1 - F(x^*))}}) - F_{\mathcal N (0, 1)}(-\frac{t}{\sqrt{F(x^*)(1 - F(x^*))}}).  
+$
+
+
+
+\end{document}
