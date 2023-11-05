@@ -1,0 +1,100 @@
+\documentclass[14pt]{extarticle}
+
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{graphicx}
+\usepackage{caption}
+\DeclareCaptionLabelSeparator{dot}{. }
+\captionsetup{justification=centering,labelsep=dot}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\input glyphtounicode.tex
+\input glyphtounicode-cmr.tex
+\pdfgentounicode=1
+\usepackage{bm}
+
+\begin{document}
+
+ФИО: Медяков Даниил Олегович
+
+\vspace{10pt}
+
+Номер задачи: 52
+
+\vspace{10pt}
+
+Решение:
+
+\vspace{10pt}
+
+По условию:
+
+\begin{gather*}
+    H_1: \mathcal{N} (-1, 1)\\
+    H_2: Exp(2)
+\end{gather*}
+
+Для начала запишем риски:
+
+\begin{gather*}
+    R_1 = -1\cdot\mathbb P_1(H_1) + 2\cdot\mathbb P_1(H_2) = 2\alpha - (1-\alpha) = 3\alpha - 1\\
+    R_2 = -1\cdot\mathbb P_2(H_2) + 2\cdot\mathbb P_2(H_1) = 2\beta - (1-\beta) = 3\beta - 1
+\end{gather*}
+
+Далее запишем функцию отношения правдоподобия:
+
+\begin{gather*}
+    l(x_1, x_2) = \left[4\exp(-2(x_1 + x_2))\mathbb I (x_1, x_2 > 0)\right]\cdot\\
+    \cdot\left[\frac{1}{2\pi}\exp(-\frac{1}{2}((x_1 + 1)^2 + (x_2 + 1)^2))\right]^{-1}
+\end{gather*}
+
+В случае если $x_i\leqslant 0$ хотя бы для одного из $i$, то $l(x_1, x_2) = 0$.
+
+В противном случае:
+
+$l(x_1, x_2) = 8\pi\exp\left[\frac{1}{2}((x_1 + 1)^2 + (x_2 + 1)^2 - 4(x_1 + x_2))\right]$
+
+Таким образом в функция отношения правдоподобия записывается в следующем виде:
+
+\begin{equation*}
+    l(x_1, x_2) = 
+    \begin{cases}
+        8\pi\exp\left[\frac{1}{2}((x_1 - 1)^2 + (x_2 - 1)^2)\right], x_1, x_2 > 0\\
+        0, \text{иначе}
+    \end{cases}
+\end{equation*}
+
+Запишем критерий:
+
+\begin{equation*}
+    \pi = 
+    \begin{cases}
+        1, l(x_1, x_2) \geqslant c\\
+        0, l(x_1, x_2) < c
+    \end{cases}
+\end{equation*}
+
+Согласно лемме Неймана-Пирсона в полной постановке этот критерий является байесовским при $c = \frac{c_{21} - c_{11}}{c_{12} - c_{22}}\frac{q_1}{q_2} = \frac{3}{2}$.
+
+При этом байесовский риск
+
+\begin{equation*}
+    r(\pi) = R_1(\pi)q_1 + R_2(\pi)q_2 = \frac{3}{5}(3\alpha - 1) + \frac{2}{5}(3\beta - 1)
+\end{equation*}
+
+Теперь найдем ошибку первого рода:
+
+\begin{gather*}
+    \alpha = \mathbb P_1\left[l(x)\geqslant\frac{3}{2}\right] = \mathbb P_1\left[x_1, x_2 > 0, (x_1 - 1)^2 + (x_2 - 1)^2 \geqslant \underbrace{2\ln(\frac{3}{16\pi})}_{ < 0}\right] =\\
+    =\mathbb P_1 [x_1 > 0, x_2 > 0] = (1 - F_{\mathcal{N}(-1, 1)}^2 (0))^2 = 0,025.
+\end{gather*}
+
+Теперь найдем ошибку второго рода: 
+
+\begin{gather*}
+    \beta = \mathbb P_2\left[l(x) < \frac{3}{2}\right] = \mathbb P_2\left[(x_1 - 1)^2 + (x_2 - 1)^2 < 0\right]+\\
+    + \mathbb P_2\left[x_1 < 0 ~\text{или}~ x_2 < 0\right] = 0.
+\end{gather*}
+
+\end{document}
