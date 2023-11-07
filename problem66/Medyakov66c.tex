@@ -1,0 +1,103 @@
+\documentclass[14pt]{extarticle}
+
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{graphicx}
+\usepackage{caption}
+\DeclareCaptionLabelSeparator{dot}{. }
+\captionsetup{justification=centering,labelsep=dot}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\input glyphtounicode.tex
+\input glyphtounicode-cmr.tex
+\pdfgentounicode=1
+\usepackage{bm}
+
+\begin{document}
+
+ФИО: Медяков Даниил Олегович
+
+\vspace{10pt}
+
+Номер задачи: 66c
+
+\vspace{10pt}
+
+Решение:
+
+\vspace{10pt}
+
+Не умаляя общности, положим $c_{12} = c_{21} = 1$.
+
+Поскольку матрица штрафов имеет вид 
+\begin{equation*}
+    c = 
+    \begin{pmatrix}
+      0& 1\\
+      1& 0
+    \end{pmatrix},
+\end{equation*}
+
+то риски равны ошибкам первого и второго рода, так как
+
+\begin{gather*}
+    R_1(\delta) = c_{11}p_{11} + c_{21}p_{21} = \alpha\\
+    R_2(\delta) = c_{12}p_{12} + c_{22}p_{22} = \beta
+\end{gather*}
+
+Выпишем область, в которой байесовское решающее правило принимает $H_2$:
+
+\begin{gather*}
+    h_1(x) \geqslant \sum\limits_{j=1}^2 c_{1j}q_1f_1(x)\\
+    l(x) \geqslant \frac{c_{21} - c_{11}}{c_{12} - c_{22}}\frac{q_1}{q_2} = 1
+\end{gather*}
+
+Тогда решающее правило:
+
+\begin{equation*}
+    \delta(x)=
+    \begin{cases}
+        1, l(x) \geqslant 1\\
+        0, l(x) < 1
+    \end{cases}
+\end{equation*}
+
+\begin{gather*}
+    l(x)=\frac{\exp\left(-\frac{1}{2} \cdot(x-m_2)^T R^{-1}(x-m_2)\right)}{\exp\left(-\frac{1}{2} \cdot(x-m_1)^T R^{-1}(x-m_1)\right)} =
+    \\
+    = \exp (\frac{1}{3} \cdot(2x_1^2-2x_1-x_1x_2-2x_1+2+x_2-x_1x_2+x_2+2x_2^2 - \\ - 2x_1^2-2x_1+x_1x_2-2x_1-2+x_2+x_1x_2+x_2-2x_2^2))
+    = \\
+    =\exp \left(\frac{1}{3} \cdot\left(-8x_1+4x_2 \right)\right) = \exp \left(\left(-\frac{8}{3}x_1+\frac{4}{3}x_2 \right)\right)
+\end{gather*}
+
+Запишем ошибки первого и второго рода:
+
+\begin{gather*}
+\alpha=\mathbb{P}_1\left[l\left(x\right) \geqslant 1\right]=\mathbb{P}_1\left[\exp \left(-\frac{8}{3}x_1+\frac{4}{3}x_2 \right) \geqslant 1\right]=\mathbb{P}_1\left[-\frac{8}{3}x_1+\frac{4}{3}x_2 \geqslant 0\right]=\\
+=\mathbb{P}_1\left[2x_1 - x_2 \leqslant 0\right] \\
+\beta=\mathbb{P}_2[l(x)<1]=\mathbb{P}_2[x_2-2x_1<0]
+\end{gather*}
+Плотность вероятности нормального распределения может быть записана следующим образом:
+$$
+f_1(x_1, x_2) = \frac{1}{2\pi\sqrt{0.75}} \exp{\left(-\frac{1}{2}\left(\begin{array}{cc}x_1 - 1 & x_2\\ \end{array}\right)\left(\begin{array}{cc}1 & 0.5\\ 0.5 & 1\\ \end{array}\right)^{-1}\left(\begin{array}{c}x_1 - 1\\ x_2\\ \end{array}\right)\right)}.
+$$
+$$
+f_2(x_1, x_2) = \frac{1}{2\pi\sqrt{0.75}} \exp{\left(-\frac{1}{2}\left(\begin{array}{cc}x_1 + 1 & x_2\\ \end{array}\right)\left(\begin{array}{cc}1 & 0.5\\ 0.5 & 1\\ \end{array}\right)^{-1}\left(\begin{array}{c}x_1 + 1\\ x_2\\ \end{array}\right)\right)}.
+$$
+Теперь интеграл, который нам нужно вычислить, записывается следующим образом:
+
+$$\int\int_D f(x_1, x_2) d(x_1, x_2),$$
+
+где $D$ - область, где выполняется условие $2x_1 - x_2 \leq 0$. Тогда
+\begin{gather*}
+\alpha = 0.180397 \\
+\beta = 0.0744975
+\end{gather*}
+
+Минимальный байесовский риск:
+$$
+r(\delta)= \frac{0.180397 + 0.0744975}{2} = 0,1274
+$$
+
+\end{document}

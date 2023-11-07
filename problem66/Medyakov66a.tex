@@ -1,0 +1,78 @@
+\documentclass[14pt]{extarticle}
+
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{graphicx}
+\usepackage{caption}
+\DeclareCaptionLabelSeparator{dot}{. }
+\captionsetup{justification=centering,labelsep=dot}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\input glyphtounicode.tex
+\input glyphtounicode-cmr.tex
+\pdfgentounicode=1
+\usepackage{bm}
+
+\begin{document}
+
+ФИО: Медяков Даниил Олегович
+
+\vspace{10pt}
+
+Номер задачи: 66a
+
+\vspace{10pt}
+
+Решение:
+
+\vspace{10pt}
+
+Не умаляя общности, положим $c_{12} = c_{21} = 1$.
+
+Поскольку матрица штрафов имеет вид 
+\begin{equation*}
+    c = 
+    \begin{pmatrix}
+      0& 1\\
+      1& 0
+    \end{pmatrix},
+\end{equation*}
+
+то риски равны ошибкам первого и второго рода, так как
+
+\begin{gather*}
+    R_1(\delta) = c_{11}p_{11} + c_{21}p_{21} = \alpha\\
+    R_2(\delta) = c_{12}p_{12} + c_{22}p_{22} = \beta
+\end{gather*}
+
+Выпишем область, в которой байесовское решающее правило принимает $H_2$:
+
+\begin{gather*}
+    h_1(x) \geqslant \sum\limits_{j=1}^2 c_{1j}q_1f_1(x)\\
+    l(x) \geqslant \frac{c_{21} - c_{11}}{c_{12} - c_{22}}\frac{q_1}{q_2} = 1
+\end{gather*}
+
+Тогда решающее правило:
+
+\begin{gather*}
+    \delta(x)=
+    \begin{cases}
+        1, l(x) \geqslant 1\\
+        0, l(x) < 1
+    \end{cases}
+\end{gather*}
+
+Рассматриваем первую компоненту. В этом случае случайная величина имеет одно из двух нормальных распределений: $H_{1a}: \mathcal{N}(1, 1), H_{2a}: \mathcal{N}(-1, 1)$.
+
+$l(x) = \exp(\frac{1}{2}((x-1)^2 - (x+1)^2)) = \exp(-2x)$.
+
+Тогда $\alpha = \mathbb P_1(l(x)\geqslant 1) = \mathbb P_1(\exp(-2x)\geqslant 1) = \mathbb P_1(x\leqslant 0) = F_{\mathcal{N}(1, 1)}(0) = 0,1587$.
+
+$\beta = \mathbb P_2(l(x) < 1) = \mathbb P_2(x > 0) = 1 - F_{\mathcal{N}(-1, 1)}(0) = 0,1587$
+
+Тогда минимальный риск:
+
+$r(\delta) = R_1(\delta)q_1 + R_2(\delta)q_2 = \frac{\alpha + \beta}{2} = 0,1587$.
+
+\end{document}
