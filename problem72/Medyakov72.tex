@@ -1,0 +1,87 @@
+\documentclass[14pt]{extarticle}
+
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{graphicx}
+\usepackage{caption}
+\DeclareCaptionLabelSeparator{dot}{. }
+\captionsetup{justification=centering,labelsep=dot}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\input glyphtounicode.tex
+\input glyphtounicode-cmr.tex
+\pdfgentounicode=1
+\usepackage{bm}
+
+\begin{document}
+
+ФИО: Медяков Даниил Олегович
+
+\vspace{10pt}
+
+Номер задачи: 72
+
+\vspace{10pt}
+
+Решение:
+
+\vspace{10pt}
+
+По гипотезе $H_0$ все элементы выборки равномерно распределены на отрезке $[0, 2]$, по гипотезе $H_1$ все элементы выборки равномерно распределены на отрезке $[1, 3]$. Нахождение такого критерия $\pi$, что $\max(\alpha, \beta)$ минимально эквивалентно нахождению минимаксного решающего правила, где матрица штрафов имеет вид 
+
+\begin{equation*}
+    c = 
+    \begin{pmatrix}
+      0& 1\\
+      1& 0
+    \end{pmatrix},
+\end{equation*}
+
+тогда $R_1(\pi) = \alpha, R_2(\pi) = \beta$.
+
+По лемме Неймана-Пирсона критерий
+
+\begin{equation*}
+    \pi_{c,p} = 
+    \begin{cases}
+        1, l(x) > c\\
+        p, l(x) = c\\
+        0, l(x) < c
+    \end{cases},
+\end{equation*}
+
+при $c > 0, p\in[0, 1], R_1(\pi_{c,p}) = R_2(\pi_{c,p})$ определяет минимаксное решающее правило. 
+
+Функция правдоподобия:
+
+\begin{equation*}
+    l(x) = \frac{\mathbb I(x\in[1, 3]^n)}{\mathbb I(x\in[0, 2]^n)} = 
+    \begin{cases}
+        1, x\in[1, 2]^n\\
+        0, \exists x_i\in[0,1]; x\in[0,2]^n\\
+        +\infty, \exists x_i\in[2,3]; x\in[1,3]^n\\
+        \text{не определена, иначе}
+    \end{cases}
+\end{equation*}
+
+Возьмем $c = 1$. Тогда
+
+$\alpha = \mathbb P_1(l(x) > c) + p\mathbb P_1(l(x) = c) = p\mathbb P_1(\forall i\hookrightarrow x_i\in[1, 2]) = \frac{p}{2^n}$,
+
+$\beta = \mathbb P_2(l(x) < c) + (1 - p)\mathbb P_2(l(x) = c) = (1 - p)\mathbb P_2(\forall i\hookrightarrow x_i\in[1, 2]) = \frac{1 - p}{2^n}$.
+
+Из требований к лемме Неймана-Пирсона получаем $\frac{p}{2^n} = \frac{1 - p}{2^n}\Rightarrow p = \frac{1}{2}$.
+
+Тогда искомый критерий:
+
+\begin{equation*}
+    \pi = 
+    \begin{cases}
+        1, l(x) > 1\\
+        \frac{1}{2}, l(x) = 1\\
+        0, l(x) < 1
+    \end{cases}.
+\end{equation*}
+
+\end{document}
