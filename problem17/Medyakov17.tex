@@ -1,0 +1,52 @@
+\documentclass[14pt]{extarticle}
+
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{graphicx}
+\usepackage{caption}
+\DeclareCaptionLabelSeparator{dot}{. }
+\captionsetup{justification=centering,labelsep=dot}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\input glyphtounicode.tex
+\input glyphtounicode-cmr.tex
+\pdfgentounicode=1
+\usepackage{bm}
+
+\begin{document}
+
+ФИО: Медяков Даниил Олегович
+
+\vspace{10pt}
+
+Номер задачи: 17
+
+\vspace{10pt}
+
+Решение:
+
+\vspace{10pt}
+
+Будем пользоваться методом моментов. Будем выражать оцениваемый параметр через моменты
+
+\begin{equation*}
+    \hat{\alpha}_m = \frac{x_1^m + \ldots + x_n^m}{n}
+\end{equation*}
+
+Для нормального распределения, имеем:
+
+\begin{equation*}
+    \begin{cases}
+        \hat{\alpha}_1 = \mathbb E\xi = m\\
+        \hat{\alpha}_2 = \mathbb D\xi = \sigma^2\\
+    \end{cases}.
+\end{equation*}
+
+Тогда искомое $m$ следующее:
+
+\begin{equation*}
+    m = \hat{\alpha}_1 = \frac{1}{n}\sum\limits_{i=1}^n x_i = \frac{1}{n}\sum\limits_{i=1}^n \ln v_i = \overline{\ln V}.
+\end{equation*}
+
+\end{document}
