@@ -1,0 +1,71 @@
+\documentclass[14pt]{extarticle}
+
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{graphicx}
+\usepackage{caption}
+\DeclareCaptionLabelSeparator{dot}{. }
+\captionsetup{justification=centering,labelsep=dot}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\input glyphtounicode.tex
+\input glyphtounicode-cmr.tex
+\pdfgentounicode=1
+\usepackage{bm}
+
+\begin{document}
+
+ФИО: Медяков Даниил Олегович
+
+\vspace{10pt}
+
+Номер задачи: 19
+
+\vspace{10pt}
+
+Решение:
+
+\vspace{10pt}
+
+$l$ - истинная длина стержня, тогда, с учетом ошибки, измеренная длина имеет распределение $\mathcal{N}(l, kl)$. Тогда функция правдоподобия
+
+\begin{equation*}
+    L(x, l) = \left(\frac{1}{\sqrt{2\pi kl}}\right)^n\cdot \exp \left(-\frac{1}{2kl}\sum\limits_{i=1}^n (x_i - l)^2\right)
+\end{equation*}
+
+Минимизация $L$ эквивалентна минимизации $\ln L$ из-за монотонности логарифма и $L \geqslant 0$. 
+
+\begin{equation*}
+    \ln L(x, l) = -\frac{n}{2}\cdot\ln(2\pi kl)-\frac{1}{2kl}\sum\limits_{i=1}^n (x_i - l)^2
+\end{equation*}
+
+\begin{gather*}
+    \frac{\partial \ln L}{\partial l} = -\frac{n}{2}\frac{2\pi k}{2\pi kl} - (-1)\frac{1}{2kl^2}\sum\limits_{i=1}^n (x_i - l)^2 - \frac{1}{2kl}(-2)\sum\limits_{i=1}^n (x_i - l) = 0\\
+    -\frac{n}{2l}+\frac{1}{2kl^2}\sum\limits_{i=1}^n (x_i - l)^2 + \frac{1}{kl}\sum\limits_{i=1}^n (x_i - l) = 0\\
+    -nkl + \sum\limits_{i=1}^n (x_i - l)^2 + 2l\sum\limits_{i=1}^n (x_i - l) = 0\\
+    -nkl + \sum\limits_{i=1}^n (x_i^2 - 2x_i l - l^2) + \sum\limits_{i=1}^n (2lx_i - 2l^2) = 0\\
+    -nkl + \sum\limits_{i=1}^n (x_i^2 - l^2) = 0; -nkl - nl^2 + \sum\limits_{i=1}^n x_i^2 = 0; l = \frac{-k \pm \sqrt{k^2 + 4\overline{x^2}}}{2}
+\end{gather*}
+
+Поскольку $l$ - длина стержня, то нас интересует только положительный корень. Покажем, что эта точка является глобальным минимумом. Для этого посмотрим на знак второй производной.
+
+\begin{gather*}
+    \frac{\partial^2 \ln L}{\partial^2 l} = \frac{\partial}{\partial l}\left(\frac{-nkl - nl^2 + \sum\limits_{i=1}^n x_i^2}{2kl^2}\right) = \frac{-nk - 2nl}{2kl^2} +\\
+    + \frac{-nkl - 2 \sum\limits_{i=1}^n x_i^2 - nl^2}{2kl^3} = \frac{1}{2kl^3}\left(-nkl - 2nl^2 + 2nkl - 2\sum\limits_{i=1}^n x_i^2 + 2nl^2\right) =\\
+    =\frac{1}{2kl^3}\left(nkl - 2\sum\limits_{i=1}^n x_i^2\right)
+\end{gather*}
+
+Выпуклости вниз на $l\in(0, +\infty)$ будет достаточно для того, чтобы найденная точка являлась минимумом из-за гладкости $\ln L$. То есть,
+
+\begin{equation*}
+    \frac{\partial^2 \ln L}{\partial^2 l} < 0 \Leftrightarrow \frac{kl}{2} < \frac{1}{n}\sum\limits_{i=1}^n x_i^2 = \overline{x^2}.
+\end{equation*}
+
+Получили, что при выполнении условия $kl < 2\overline{x^2}$ ОМП:
+
+\begin{equation*}
+    l = \frac{-k + \sqrt{k^2 + 4\overline{x^2}}}{2}.
+\end{equation*}
+
+\end{document}
