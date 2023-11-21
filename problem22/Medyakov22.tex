@@ -1,0 +1,93 @@
+\documentclass[14pt]{extarticle}
+
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{graphicx}
+\usepackage{caption}
+\DeclareCaptionLabelSeparator{dot}{. }
+\captionsetup{justification=centering,labelsep=dot}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\input glyphtounicode.tex
+\input glyphtounicode-cmr.tex
+\pdfgentounicode=1
+\usepackage{bm}
+
+\begin{document}
+
+ФИО: Медяков Даниил Олегович
+
+\vspace{10pt}
+
+Номер задачи: 22
+
+\vspace{10pt}
+
+Решение:
+
+\vspace{10pt}
+
+$X\in \mathcal{U}[a, a+1]$ - случайная величина, $X_1, \ldots X_n$ - выборка размера $n$.
+
+1. $A_1^* = \overline{X} - \frac{1}{2}$. 
+
+Для начала проверим эту статистику на несмещенность:
+
+\begin{equation*}
+    \mathbb E_a \left[\overline{X} - \frac{1}{2}\right] = \mathbb E_a \left[\overline{X}\right] - \frac{1}{2} = \frac{1}{n}n\left(a + \frac{1}{2}\right) - \frac{1}{2} = a
+\end{equation*}
+
+Получили, что статистика обладает свойством несмещенности. Теперь проверим на состоятельность. Для этого необходимо
+
+\begin{equation*}
+    \forall a~~ T_n(\textbf{X})\overset{\mathbb P_a}{\underset{n\rightarrow+\infty}{\longrightarrow}}a \Leftrightarrow \forall a~~\forall\varepsilon~~ \underset{n\rightarrow\infty}{\lim} \mathbb P_a\left[|T_n(\textbf{X}) - a| > \varepsilon\right] = 0
+\end{equation*}
+
+Для оценки слагаемого под пределом будем пользоваться неравенством Чебышева, то есть
+
+\begin{equation*}
+    \forall \varepsilon > 0 ~~\mathbb P\left[|\xi - \mathbb E\xi| > \varepsilon\right] \leqslant \frac{\mathbb D\xi}{\varepsilon^2},
+\end{equation*}
+
+где $\xi$ - случайная величина с конечным математическим ожиданием и дисперсией. В нашем случае, для $\mathcal{U}[a, a+1]$ мы получаем:
+
+\begin{gather*}
+    \mathbb D_a[A_1^*] = \frac{1}{n^2}\mathbb D_a\left[\sum\limits_{i=1}^n x_i\right] = \frac{1}{n^2}\sum\limits_{i=1}^n \mathbb D_a[x_i] = \frac{n}{n^2}\frac{1}{12} = \frac{1}{12n} < +\infty,\\
+    \forall \varepsilon > 0 ~~ \mathbb P_a[|A_1^* - a| > \varepsilon] \leqslant \frac{\mathbb D[A_1^*]}{\varepsilon^2} = \frac{1}{12\varepsilon^2n}\underset{n\rightarrow\infty}{\longrightarrow}0.
+\end{gather*}
+
+Получили сходимость по вероятности к нулю, а значит $A_1^*$ состоятельна.
+
+2. $A_2^* = X_{(n)} - \frac{n}{n+1}$. $X_{(n)} - a\in Beta(n, 1)$, где для $\xi\in Beta(\alpha, \beta)$ верно:
+
+\begin{equation*}
+    \mathbb E \xi = \frac{\alpha}{\alpha + \beta},\quad \mathbb D\xi = \frac{\alpha\beta}{(\alpha + \beta)^2(\alpha + \beta + 1)}.
+\end{equation*}
+
+Проверим на несмещенность:
+
+\begin{gather*}
+    \mathbb E_a[A_2^*] = \mathbb E_a[X_{(n)}] - \frac{n}{n+1} = \mathbb E_{Beta(n, 1)}[X_{(n)} - a] + a - \frac{n}{n+1} = \frac{n}{n+1} +\\
+    + a - \frac{n}{n+1} = a.
+\end{gather*}
+
+Свойство несмещенности выполняется.
+
+Аналогично первому пункту проверим состоятельность:
+
+\begin{equation*}
+    \mathbb D_a[A_2^*] = \mathbb D_a[X_{(n)} - a] = \mathbb D_{Beta(n, 1)}[\xi] = \frac{n}{(n+1)^2(n+2)}\underset{n\rightarrow\infty}{\longrightarrow}0.
+\end{equation*}
+
+Это значит, что можно ограничить выражение под пределом для сходимости по вероятности с помощью неравенства Чебышева и сам этот предел равен нулю, то есть сходимость по вероятности есть. Значит свойство состоятельности выполняется.
+
+Теперь, для того, чтобы выяснить, какая статистика является наиболее предпочтительной, сравним их дисперсии:
+
+\begin{equation*}
+    \frac{1}{12n}~~ \textbf{VS}~~ \frac{n}{(n+1)^2(n+2)} \Leftrightarrow n^3 - 8n^2 + 5n + 2 ~~\textbf{VS}~~ 0.
+\end{equation*}
+
+Получили, что при $1\leqslant n \leqslant 8$ лучше использовать первую статистику, иначе вторую.
+
+\end{document}
