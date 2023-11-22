@@ -53,7 +53,7 @@ $X\in \mathcal{U}[a, a+1]$ - случайная величина, $X_1, \ldots X
 где $\xi$ - случайная величина с конечным математическим ожиданием и дисперсией. В нашем случае, для $\mathcal{U}[a, a+1]$ мы получаем:
 
 \begin{gather*}
-    \mathbb D_a[A_1^*] = \frac{1}{n^2}\mathbb D_a\left[\sum\limits_{i=1}^n x_i\right] = \frac{1}{n^2}\sum\limits_{i=1}^n \mathbb D_a[x_i] = \frac{n}{n^2}\frac{1}{12} = \frac{1}{12n} < +\infty,\\
+    \mathbb D_a[A_1^*] = \frac{1}{n^2}\mathbb D_a\left[\sum\limits_{i=1}^n X_i\right] = \frac{1}{n^2}\sum\limits_{i=1}^n \mathbb D_a[X_i] = \frac{n}{n^2}\frac{1}{12} = \frac{1}{12n} < +\infty,\\
     \forall \varepsilon > 0 ~~ \mathbb P_a[|A_1^* - a| > \varepsilon] \leqslant \frac{\mathbb D[A_1^*]}{\varepsilon^2} = \frac{1}{12\varepsilon^2n}\underset{n\rightarrow\infty}{\longrightarrow}0.
 \end{gather*}
 
@@ -88,6 +88,6 @@ $X\in \mathcal{U}[a, a+1]$ - случайная величина, $X_1, \ldots X
     \frac{1}{12n}~~ \textbf{VS}~~ \frac{n}{(n+1)^2(n+2)} \Leftrightarrow n^3 - 8n^2 + 5n + 2 ~~\textbf{VS}~~ 0.
 \end{equation*}
 
-Получили, что при $1\leqslant n \leqslant 8$ лучше использовать первую статистику, иначе вторую.
+Получили, что при $1\leqslant n < 8$ лучше использовать первую статистику, иначе вторую.
 
 \end{document}
