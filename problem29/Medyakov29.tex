@@ -1,0 +1,60 @@
+\documentclass[14pt]{extarticle}
+
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{graphicx}
+\usepackage{caption}
+\DeclareCaptionLabelSeparator{dot}{. }
+\captionsetup{justification=centering,labelsep=dot}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\input glyphtounicode.tex
+\input glyphtounicode-cmr.tex
+\pdfgentounicode=1
+\usepackage{bm}
+
+\begin{document}
+
+ФИО: Медяков Даниил Олегович
+
+\vspace{10pt}
+
+Номер задачи: 29
+
+\vspace{10pt}
+
+Решение:
+
+\vspace{10pt}
+
+Рассматриваем $\mathcal{U}[\theta, 2\theta], \theta > 0$. Будем искать достаточную статистику малой размерности. Для начала запишем функцию правдоподобия:
+
+\begin{equation*}
+    L(\mathbf{X}, \theta) = \frac{1}{\theta}\cdot\mathbb I (X_1\in [\theta, 2\theta])\cdot\ldots\cdot\frac{1}{\theta}\cdot\mathbb I (X_n\in[\theta, 2\theta]) = \frac{1}{\theta^n}\cdot\mathbb I(\mathbf{X}\in[\theta, 2\theta]^n).
+\end{equation*}
+
+Тот факт, что $\mathbf{X}\in[\theta, 2\theta]^n$ эквивалентно тому, что максимальный из $X_i$ меньше $2\theta$, а минимальный из $X_i$ больше $\theta$. Тогда это условие перепишем через порядковые статистики:
+
+\begin{equation*}
+\begin{cases}
+    X_{(1)} \geqslant \theta\\
+    X_{(n)} \leqslant 2\theta
+\end{cases}
+\end{equation*}
+
+Тогда функция правдоподобия принимает вид:
+
+\begin{equation*}
+    L(\mathbf{X}, \theta) = \frac{1}{\theta^n}\cdot \mathbb I(X_{(1)} \geqslant \theta)\cdot \mathbb I(X_{(n)} \leqslant 2\theta)
+\end{equation*}
+
+Положим $g(S(\mathbf{X}), \theta) = L(\mathbf{X}, \theta)$. Тогда по критерию факторизации статистика
+
+\begin{equation*}
+    S(\mathbf{X}) = \left(X_{(1)}, X_{(n)}\right)
+\end{equation*}
+
+является достаточной с размерностью 2.
+
+\end{document}
